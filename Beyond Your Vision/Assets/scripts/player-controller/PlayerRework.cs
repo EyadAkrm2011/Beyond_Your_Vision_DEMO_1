@@ -1,4 +1,3 @@
-using UnityEditor.XR;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerRework : MonoBehaviour
@@ -10,19 +9,19 @@ public class PlayerRework : MonoBehaviour
     public float movementSpeed;
     public void FrontMove()
     {
-        transform.position = transform.position -  new Vector3(0 , 0 , movementSpeed) * Time.deltaTime;
+        transform.position += transform.forward * movementSpeed * Time.deltaTime;
     }
     public void BackMove()
     {
-        transform.position = transform.position + new Vector3(0, 0, movementSpeed) * Time.deltaTime;
+        transform.position -= transform.forward * movementSpeed * Time.deltaTime;
     }
     public void RightMove()
     {
-        transform.position = transform.position - new Vector3(movementSpeed, 0, 0) * Time.deltaTime;
+        transform.position += transform.right * movementSpeed * Time.deltaTime;
     }
     public void LeftMove()
     {
-        transform.position = transform.position + new Vector3(movementSpeed , 0 , 0) * Time.deltaTime;
+        transform.position -= transform.right * movementSpeed * Time.deltaTime;
     }
     public void Forward(InputAction.CallbackContext cntx)
     {
@@ -89,12 +88,10 @@ public class PlayerRework : MonoBehaviour
         {
             RightMove();
         }
-        if (LeftBool == true) {
+        if (LeftBool == true)
+        {
 
             LeftMove();
         }
     }
 }
-
-
-

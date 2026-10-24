@@ -1,27 +1,57 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
+
 public class PlayerInteractor : MonoBehaviour
 {
     public float reachDistance = 3f;
     public TextMeshProUGUI interactionText;
+    private Transform cam;
+    private IInteractable currentInteractable;
+
+    void Start()
+    {
+        if (Camera.main != null)
+        {
+            cam = Camera.main.transform;
+        }
+        else
+        {
+            Debug.LogError("no cam");
+        }
+        if (interactionText != null)
+        {
+            interactionText.text = "";
+        }
+    }
 
     void Update()
     {
-        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        if (cam == null) return;
+        IInteractable itemFound = null;
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, reachDistance))
+        if (Physics.Raycast(cam.position, cam.forward, out hit, reachDistance))
         {
-            IInteractable item = hit.collider.GetComponent<IInteractable>();
-            if (item != null)
+            itemFound = hit.collider.GetComponentInParent<IInteractable>();
+        }
+        currentInteractable = itemFound;
+        if (interactionText != null)
+        {
+            if (currentInteractable != null)
             {
-                interactionText.text = "Press E to " + item.Prompt;
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    item.Interact();
-                }
-                return;
+                interactionText.text = "Press E to " + currentInteractable.Prompt;
+            }
+            else
+            {
+                interactionText.text = "";
             }
         }
-        interactionText.text = "";
+        if (currentInteractable != null)
+        {
+            if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+            {
+                currentInteractable.Interact();
+            }
+        }
     }
 }
