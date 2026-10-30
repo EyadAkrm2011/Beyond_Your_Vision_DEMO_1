@@ -1,11 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
 
 public class PlayerInteractor : MonoBehaviour
 {
-    public float reachDistance = 3f;
-    public TextMeshProUGUI interactionText;
+    [SerializeField] private float reachDistance = 3f;
+    [SerializeField] private TextMeshProUGUI interactionText;
+
     private Transform cam;
     private IInteractable currentInteractable;
 
@@ -30,11 +31,16 @@ public class PlayerInteractor : MonoBehaviour
         if (cam == null) return;
         IInteractable itemFound = null;
         RaycastHit hit;
-        if (Physics.Raycast(cam.position, cam.forward, out hit, reachDistance))
+
+        Vector3 rayOrigin = cam.position + (cam.forward * 0.3f);
+
+        if (Physics.Raycast(rayOrigin, cam.forward, out hit, reachDistance))
         {
             itemFound = hit.collider.GetComponentInParent<IInteractable>();
         }
+
         currentInteractable = itemFound;
+
         if (interactionText != null)
         {
             if (currentInteractable != null)
@@ -46,10 +52,12 @@ public class PlayerInteractor : MonoBehaviour
                 interactionText.text = "";
             }
         }
+
         if (currentInteractable != null)
         {
             if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
             {
+                Debug.Log("E key pressed!");
                 currentInteractable.Interact();
             }
         }

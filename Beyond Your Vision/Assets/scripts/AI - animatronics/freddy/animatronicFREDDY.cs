@@ -4,12 +4,11 @@ public class animatronicFREDDY : MonoBehaviour
 {
     [SerializeField] private int stage = 1;
 
-    [SerializeField] private Transform s1_pos;
-    [SerializeField] private Transform s2_pos;
-    [SerializeField] private Transform s3_pos;
+    [SerializeField] private Vector3 s1_pos;
+    [SerializeField] private Vector3 s2_pos;
+    [SerializeField] private Vector3 s3_pos;
 
     [SerializeField] private FnafDoor fnafdoor;
-    [SerializeField] private FuseBox Fusebox;
     [SerializeField] private Transform player;
 
     [SerializeField] private float stageTime = 10f;
@@ -20,7 +19,7 @@ public class animatronicFREDDY : MonoBehaviour
 
     void Start()
     {
-        if (s1_pos == null || s2_pos == null || s3_pos == null || fnafdoor == null || Fusebox == null || player == null)
+        if (s1_pos == null || s2_pos == null || s3_pos == null || fnafdoor == null || player == null)
         {
             Debug.LogError("Error", this);
             enabled = false;
@@ -45,7 +44,7 @@ public class animatronicFREDDY : MonoBehaviour
         }
         else if (stage == 3)
         {
-            if (fnafdoor.IsOpen == false || Fusebox.IsBroken == false)
+            if (fnafdoor.IsOpen == false)
             {
                 GoToStage(1);
             }
@@ -75,17 +74,16 @@ public class animatronicFREDDY : MonoBehaviour
 
         if (stage == 1)
         {
-            transform.position = s1_pos.position;
+            transform.position = s1_pos;
         }
         if (stage == 2)
         {
-            transform.position = s2_pos.position;
+            transform.position = s2_pos;
         }
         if (stage == 3)
         {
-            transform.position = s3_pos.position;
+            transform.position = s3_pos;
             timer = warningTime;
-            Fusebox.Break();
         }
     }
 }
