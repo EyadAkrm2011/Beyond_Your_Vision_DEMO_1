@@ -7,6 +7,6 @@ public class SceneTransition : MonoBehaviour
   async void Start()
     {
         await Task.Delay(5400);
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("Night1andNewspaper");
     }
 }

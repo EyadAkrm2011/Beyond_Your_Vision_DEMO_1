@@ -3407,7 +3407,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb1659419625fe041a26d3ef0f804900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoToScene
-  Go: 0
 --- !u!1 &1715135611
 GameObject:
   m_ObjectHideFlags: 0
@@ -3748,7 +3747,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6fdbe6a98b996d74ca21f4f3d0b9c439, type: 2}
+  - {fileID: 2100000, guid: a4d2b8a8de2ce134da099466cef583b6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
