@@ -93,6 +93,35 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UIopen",
+            "id": "3a7b115a-348f-4e98-9fac-7f11d03c8526",
+            "actions": [
+                {
+                    "name": "Open",
+                    "type": "Button",
+                    "id": "cb31ddf1-ec60-45fe-bd42-b6e775619718",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "51cd7320-075f-4555-bdaa-0b43e9e05fba",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Open",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
