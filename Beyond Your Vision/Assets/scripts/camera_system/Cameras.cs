@@ -8,6 +8,8 @@ public class Cameras : MonoBehaviour
     [SerializeField] private Camera player;
     [SerializeField] private GameObject[] security;
     [SerializeField] private TextMeshProUGUI camnumb;
+    [SerializeField] private Power power;
+    [SerializeField] private CameraGlitch glitch;
 
     private bool isMonitorOpen = false;
     private int currentCamIndex = 0;
@@ -55,6 +57,9 @@ public class Cameras : MonoBehaviour
 
         isMonitorOpen = true;
 
+        if (glitch != null) glitch.gameObject.SetActive(true);
+        if (power != null) power.consume = power.consume + 1;
+
         if (moniter != null) moniter.SetActive(true);
         if (player != null) player.enabled = false;
 
@@ -63,8 +68,11 @@ public class Cameras : MonoBehaviour
 
     void CloseMonitor()
     {
+        if (isMonitorOpen && power != null) power.consume = power.consume - 1;
+
         isMonitorOpen = false;
 
+        if (glitch != null) glitch.gameObject.SetActive(false);
         if (moniter != null) moniter.SetActive(false);
         if (player != null) player.enabled = true;
 
@@ -99,6 +107,9 @@ public class Cameras : MonoBehaviour
     {
         if (index < 0 || index >= security.Length) return;
         currentCamIndex = index;
+
+        if (TryGetComponent(out AudioSource sound)) sound.Play();
+        if (glitch != null) glitch.Pulse();
 
         foreach (GameObject camObj in security)
         {

@@ -1,11 +1,12 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class hourtime : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private GameObject black;
-    [SerializeField] private float time1 = 60f;
+    [SerializeField] private float time1;
 
     private int time2 = 12;
     private float timer = 0f;
@@ -32,7 +33,7 @@ public class hourtime : MonoBehaviour
 
             if (time2 == 6)
             {
-                TriggerSixAM();
+                TriggerSixAMAsync();
             }
         }
 
@@ -42,7 +43,7 @@ public class hourtime : MonoBehaviour
         }
     }
 
-    void TriggerSixAM()
+    void TriggerSixAMAsync()
     {
         isGameOver = true;
 
@@ -57,5 +58,11 @@ public class hourtime : MonoBehaviour
         }
 
         Debug.Log("6 AM");
+        Invoke("LoadUI", 10f);
+    }
+
+    void LoadUI()
+    {
+        SceneManager.LoadScene("UI");
     }
 }
